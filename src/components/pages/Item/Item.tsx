@@ -1,12 +1,6 @@
-import { useEffect } from "react"
-
-const Item = () => {
-
-useEffect(()=>{
-},[])
-
+const Item = (item: undefined) => {
   return (
-    <div>Item</div>
+    <div>{item}</div>
   )
 }
 

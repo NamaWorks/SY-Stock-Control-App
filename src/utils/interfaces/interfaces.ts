@@ -8,5 +8,6 @@ export interface NavigationContextInterface {
 } 
 
 export interface ProductsContextInterface {
-  products: undefined[];
+  products: [] | undefined;
+  setProducts: React.Dispatch<React.SetStateAction<[] | undefined | void | Promise<void>>>;
 }
