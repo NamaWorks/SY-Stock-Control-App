@@ -6,3 +6,7 @@ export interface NavigationContextInterface {
   previousPage: string;
   setPreviousPage: React.Dispatch<React.SetStateAction<string>>;
 } 
+
+export interface ProductsContextInterface {
+  products: undefined[];
+}

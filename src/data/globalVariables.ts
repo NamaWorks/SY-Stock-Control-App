@@ -1,1 +1,1 @@
-export const apiUrl = ''
+export const apiUrl = 'https://api.airtable.com/v0/'
