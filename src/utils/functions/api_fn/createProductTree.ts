@@ -18,7 +18,5 @@ export const createProductTree = (products: RecordsInterface | undefined) => {
     }
   });
 
-  console.log(categoriesTree)
-
   return categoriesTree;
 }

@@ -1,17 +1,17 @@
-import { NavigationContext } from "@/utils/contexts/contexts";
+// import { NavigationContext } from "@/utils/contexts/contexts";
 import { redirectToPage } from "@/utils/functions/navigation_fn/redirectToPage";
-import { NavigationContextInterface } from "@/utils/interfaces/interfaces";
+// import { NavigationContextInterface } from "@/utils/interfaces/interfaces";
 import { Button, Flex, Image, Input } from "@chakra-ui/react";
-import { useContext, useEffect } from "react";
+// import { useContext, useEffect } from "react";
 
 const Login = () => {
 
-  const { setCurrentPage, setPreviousPage } = useContext(NavigationContext) as NavigationContextInterface
+  // const { setCurrentPage, setPreviousPage } = useContext(NavigationContext) as NavigationContextInterface
 
-  useEffect(()=>{
-    setCurrentPage('login');
-    setPreviousPage('login')
-  })
+  // useEffect(()=>{
+  //   setCurrentPage('login');
+  //   setPreviousPage('login')
+  // })
 
   return (
     <>

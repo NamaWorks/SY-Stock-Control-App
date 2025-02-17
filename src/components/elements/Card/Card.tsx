@@ -1,29 +1,41 @@
+import { CategorieInterface } from "@/utils/interfaces/interfaces"
 import { CardRoot, CardTitle, Image } from "@chakra-ui/react"
+import { MouseEventHandler } from "react"
 
 
-const Card = () => {
+const Card = ({data, kind, fnc}:{data:CategorieInterface | undefined | string, kind:string, fnc?:MouseEventHandler<HTMLDivElement> | undefined}) => {
   return (
     <>
       <CardRoot
         minWidth={'170px'}
-        // width={'100%'}
+        colorPalette={'orange'}
         minHeight={'250px'}
         display={'flex'}
-        flexDir={'column'}
+        flexDir={'row'}
         alignItems={'center'}
         justifyContent={'center'}
         position={'relative'}
+        variant={'outline'}
+        onClick={fnc}
       >
 
-        <Image
+        {kind === 'product' &&
+          <Image
           position={'absolute'}
           src="#"
           alt="image"
           opacity={'45%'}
         />
+        }
 
         <CardTitle>
-          TESTE
+          {
+            kind === 'group' && typeof data !== 'string' && data?.name?.toUpperCase()
+          }
+          
+          {
+            kind === 'subgroup' && data as unknown as string
+          }
         </CardTitle>
 
 
