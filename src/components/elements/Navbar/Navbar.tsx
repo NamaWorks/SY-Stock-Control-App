@@ -25,7 +25,7 @@ const Navbar = () => {
         title="fetching"
         position={'fixed'}
         top={'45%'}
-        left={0}
+        left={'0'}
         zIndex={99}
 
       >
@@ -44,8 +44,8 @@ const Navbar = () => {
         justifyContent={"space-between"}
         width={"95svw"}
         position={"fixed"}
-        top={"2.5svw"}
-        left={"2.5svw"}
+        top={"15px"}
+        left={"10px"}
         zIndex={"99"}
       >
         <Flex
@@ -134,6 +134,7 @@ const Navbar = () => {
           alignSelf={"center"}
           colorPalette={"blue"}
           variant={"subtle"}
+          onClick={()=>{redirectToPage('dashboard/cart')}}
         >
           Carrito
         </Button>

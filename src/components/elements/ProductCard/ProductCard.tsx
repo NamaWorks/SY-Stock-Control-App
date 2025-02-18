@@ -1,59 +1,81 @@
-import { ProductFromAtInterface } from "@/utils/interfaces/interfaces"
-import { CardBody, CardFooter, CardRoot, CardTitle, Image } from "@chakra-ui/react"
-import { MouseEventHandler } from "react"
+import { ProductFromAtInterface } from "@/utils/interfaces/interfaces";
+import {
+  CardBody,
+  CardFooter,
+  CardRoot,
+  CardTitle,
+  Flex,
+  Image,
+} from "@chakra-ui/react";
+import { MouseEventHandler } from "react";
 
-
-const ProductCard = ({data,  fnc}:{data: ProductFromAtInterface ,fnc?:MouseEventHandler<HTMLDivElement> | undefined}) => {
+const ProductCard = ({
+  data,
+  fnc,
+}: {
+  data: ProductFromAtInterface;
+  fnc?: MouseEventHandler<HTMLDivElement> | undefined;
+}) => {
   return (
     <>
       <CardRoot
-        minWidth={'170px'}
-        maxWidth={'170px'}
-        colorPalette={'orange'}
-        minHeight={'250px'}
-        maxHeight={'250px'}
-        display={'flex'}
-        flexDir={'column'}
-        alignItems={'center'}
-        justifyContent={'center'}
-        position={'relative'}
-        variant={'outline'}
+        minWidth={"170px"}
+        maxWidth={"170px"}
+        colorPalette={"orange"}
+        minHeight={"300px"}
+        maxHeight={"300px"}
+        display={"flex"}
+        flexDir={"column"}
+        alignItems={"center"}
+        justifyContent={"center"}
+        position={"relative"}
+        variant={"subtle"}
         onClick={fnc}
-        gap={'0.25rem'}
-        padding={'1rem'}
+        // gap={"0.25rem"}
+        // padding={"1rem"}
       >
-
-        {data.fields.imagen &&
+        <Flex
+          // height={'40%'}
+          overflow={'hidden'}
+          display={'flex'}
+        >
           <Image
-          position={'absolute'}
-          src={data.fields.imagen}
-          alt={data.fields.nombre}
-          opacity={'45%'}
-        />
-        }
+            // position={"absolute"}
+            // src={data.fields.imagen?.thumbnails.small.url}
+            src={data.fields.imagenUrl}
+            // height={"100%"}
+            // width={"100%"}
+            // alignSelf={"center"}
+            // justifySelf={"center"}
+            alt={data.fields.nombre}
+            objectFit={'contain'}
+            objectPosition={'center'}
+            borderRadius={'5px'}
+            // opacity={"45%"}
+          />
+        </Flex>
 
-        <CardTitle
-          textAlign={'center'}
+        <Flex
+          display={'flex'}
+          flexDirection={'column'}
+          // height={'60%'}
+          gap={0}
+          alignItems={'center'}
+          justifyContent={'center'}
         >
-          {data.fields.nombre}
-        </CardTitle>
+          <CardTitle textAlign={"center"} padding={'2px'}>{data.fields.nombre}</CardTitle>
 
-        <CardBody
-          textAlign={'center'}
-        >
-          {data.fields.stock || 'no stock data'}
-        </CardBody>
+          <CardBody textAlign={"center"} padding={'2px'}>
+            {`${data.fields.stock} unidades`}
+          </CardBody>
 
-        <CardFooter
-          textAlign={'center'}
-        >
-          {`${data.fields.precio} €`}
-        </CardFooter>
-
-
+          <CardFooter textAlign={"center"} padding={'2px'}>
+            {`${data.fields.precio} €`}
+          </CardFooter>
+        </Flex>
       </CardRoot>
     </>
-  )
-}
+  );
+};
 
-export default ProductCard
+export default ProductCard;
