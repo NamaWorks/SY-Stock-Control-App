@@ -7,7 +7,7 @@ import { getDataFromAt } from "@/utils/functions/api_fn/getDataFromAt"
 import Card from "../Card/Card"
 import { createProductTree } from "@/utils/functions/api_fn/createProductTree"
 import { Flex } from "@chakra-ui/react"
-import { redirectToPage } from "@/utils/functions/navigation_fn/redirectToPage"
+// import { redirectToPage } from "@/utils/functions/navigation_fn/redirectToPage"
 
 const Subgroups = () => {
   const { group } = useParams<{ group: string }>()
@@ -72,13 +72,13 @@ const Subgroups = () => {
       >
       {subgroupsToPrint &&
         subgroupsToPrint?.map((subgroup) => {
-          return <Card key={subgroup} data={subgroup} kind="subgroup" fnc={()=>{redirectToPage(`dashboard/${group}/${subgroup}`); setFetchingData(true)}}/>
+          return <Card key={subgroup} data={subgroup} kind="subgroup" to={`/dashboard/${group}/${subgroup}`} fnc={()=>{setFetchingData(true)}}/>
         })
       }
 
       {
         subgroupsToPrint === undefined &&
-        <Card key={'all'} data={'all'} kind="subgroup" fnc={()=>{redirectToPage(`dashboard/${group}/all`); setFetchingData(true)}}/>
+        <Card key={'all'} data={'todos'} kind="subgroup" to={`/dashboard/${group}/all`} fnc={()=>{setFetchingData(true)}}/>
       }
       </Flex>
     </>

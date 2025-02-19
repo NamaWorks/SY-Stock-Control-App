@@ -1,5 +1,5 @@
 import { ShoppingCartContext } from "@/utils/contexts/contexts"
-import { addNewElementToCart } from "@/utils/functions/cart_fn/addNewElementToCart"
+// import { addNewElementToCart } from "@/utils/functions/cart_fn/addNewElementToCart"
 import { ProductFromAtInterface, ShoppingCartContextInterface } from "@/utils/interfaces/interfaces"
 import { Button, Flex, Icon, Text } from "@chakra-ui/react"
 import { useContext, useState } from "react"
@@ -7,8 +7,8 @@ import { useContext, useState } from "react"
 const ItemPopup = ({product, setClickedItem}:{product: ProductFromAtInterface, setClickedItem: React.Dispatch<React.SetStateAction<ProductFromAtInterface | null>>}) => {
 
   const { productsInCart, setProductsInCart } = useContext(ShoppingCartContext) as ShoppingCartContextInterface
-
   const [ numberOfItemsToAdd, setNumberOfItemsToAdd ] = useState<number>(1)
+
 
   return (
     <>
@@ -114,9 +114,11 @@ const ItemPopup = ({product, setClickedItem}:{product: ProductFromAtInterface, s
           <Button
             colorPalette={'orange'}
             onClick={async()=>{
-              const newArr = addNewElementToCart(productsInCart, product, numberOfItemsToAdd);
-              setProductsInCart(newArr);
-              localStorage.setItem('currentCart', await JSON.stringify(newArr) )
+              // const newArr = addNewElementToCart(productsInCart, product, numberOfItemsToAdd);
+              setProductsInCart([...productsInCart, {item:product, numberOfItems:numberOfItemsToAdd}]);
+              console.log(productsInCart)
+              setClickedItem(null)
+              // localStorage.setItem('currentCart', await JSON.stringify(newArr) )
             }}
           >
           AÑADIR

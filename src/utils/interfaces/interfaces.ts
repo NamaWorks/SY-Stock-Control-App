@@ -14,6 +14,13 @@ export interface ProductsContextInterface {
   setProductsTree: React.Dispatch<React.SetStateAction<CategorieInterface[] | undefined>>
 }
 
+export interface NotificationContextInterface {
+  notificationText:string;
+  setNotificationText: React.Dispatch<React.SetStateAction<string>>;
+  notificationOn: boolean;
+  setNotificationOn: React.Dispatch<React.SetStateAction<boolean>>
+}
+
 export interface ShoppingCartContextInterface {
   productsInCart: ShoppingCartItemInterface[];
   setProductsInCart: React.Dispatch<React.SetStateAction<ShoppingCartItemInterface[] | undefined>>

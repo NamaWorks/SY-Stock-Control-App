@@ -31,7 +31,7 @@ const ProductCard = ({
         position={"relative"}
         variant={"subtle"}
         onClick={fnc}
-        // gap={"0.25rem"}
+        gap={"0.5rem"}
         // padding={"1rem"}
       >
         <Flex
@@ -63,7 +63,7 @@ const ProductCard = ({
           alignItems={'center'}
           justifyContent={'center'}
         >
-          <CardTitle textAlign={"center"} padding={'2px'}>{data.fields.nombre}</CardTitle>
+          <CardTitle textAlign={"center"} padding={'2px'} textTransform={'uppercase'} lineHeight={'0.95'}>{data.fields.nombre}</CardTitle>
 
           <CardBody textAlign={"center"} padding={'2px'}>
             {`${data.fields.stock} unidades`}

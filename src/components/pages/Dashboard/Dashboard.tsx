@@ -24,7 +24,7 @@ const Dashboard = memo(() => {
   useEffect(() => {
 
     if(!products){
-      setFetchingData(true)
+      // setFetchingData(true)
       const firstCall = async ()=>{
         setProducts(await getDataFromAt(import.meta.env.VITE_PRODUCTS_TABLE));
         setFetchingData(false)
@@ -42,10 +42,10 @@ const Dashboard = memo(() => {
     //   console.log("interval cleared");
     // };
 
-    window.addEventListener('load', ()=>{setFetchingData(false)})
+    // window.addEventListener('load', ()=>{setFetchingData(false)})
 
     return ()=>{
-      window.removeEventListener('load', ()=>{setFetchingData(false)})
+      // window.removeEventListener('load', ()=>{setFetchingData(false)})
     }
   });
 

@@ -1,24 +1,31 @@
-import { NavigationContext, ProductsContext } from "@/utils/contexts/contexts";
+import { 
+  // NavigationContext, 
+  ProductsContext } from "@/utils/contexts/contexts";
 import { getDataFromAt } from "@/utils/functions/api_fn/getDataFromAt";
-import { redirectToPage } from "@/utils/functions/navigation_fn/redirectToPage";
-import { NavigationContextInterface, ProductsContextInterface } from "@/utils/interfaces/interfaces";
-import { Alert, Button, Flex, Icon, Spinner } from "@chakra-ui/react";
-import { useContext, useEffect} from "react";
+// import { redirectToPage } from "@/utils/functions/navigation_fn/redirectToPage";
+import { 
+  // NavigationContextInterface, 
+  ProductsContextInterface } from "@/utils/interfaces/interfaces";
+import { Button, Flex, Icon} from "@chakra-ui/react";
+import { useContext, 
+  // useEffect
+} from "react";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
-  const { fetchingData, setFetchingData } = useContext(NavigationContext) as NavigationContextInterface;
+  // const { fetchingData, setFetchingData } = useContext(NavigationContext) as NavigationContextInterface;
   const { products,setProducts } = useContext(ProductsContext) as ProductsContextInterface;
 
-  useEffect(()=>{
-    setFetchingData(false)
-  },[products, setFetchingData])
+  // useEffect(()=>{
+    // setFetchingData(false)
+  // },[products, setFetchingData])
 
   return (
     <>
 
 
 
-{fetchingData &&
+{/* {fetchingData &&
       <Alert.Root
         borderStartWidth="3px"
         borderStartColor="colorPalette.600"
@@ -34,7 +41,7 @@ const Navbar = () => {
         </Alert.Indicator>
         <Alert.Title>Cargando...</Alert.Title>
       </Alert.Root>
-      }
+      } */}
 
 
 
@@ -62,10 +69,10 @@ const Navbar = () => {
             borderRadius={"full"}
             height={"50px"}
             width={"50px"}
-            onClickCapture={() => {
-              redirectToPage('dashboard');
-            }}
           >
+            <Link
+              to={'/dashboard'}
+            >
             <Icon>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -78,11 +85,12 @@ const Navbar = () => {
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 className="lucide lucide-move-left"
-              >
+                >
                 <path d="M6 8L2 12L6 16" />
                 <path d="M2 12H22" />
               </svg>
             </Icon>
+                </Link>
           </Button>
 
           <Button
@@ -95,7 +103,7 @@ const Navbar = () => {
                 await getDataFromAt(import.meta.env.VITE_PRODUCTS_TABLE)
               );
               console.log(products)
-              setFetchingData(true)
+              // setFetchingData(true)
             }}
           >
             <Icon>
@@ -134,9 +142,12 @@ const Navbar = () => {
           alignSelf={"center"}
           colorPalette={"blue"}
           variant={"subtle"}
-          onClick={()=>{redirectToPage('dashboard/cart')}}
         >
+          <Link
+            to={'/dashboard/cart'}
+          >
           Carrito
+          </Link>
         </Button>
       </Flex>
     </>

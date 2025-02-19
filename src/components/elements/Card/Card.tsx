@@ -1,11 +1,15 @@
 import { CategorieInterface } from "@/utils/interfaces/interfaces"
 import { CardRoot, CardTitle, Image } from "@chakra-ui/react"
 import { MouseEventHandler } from "react"
+import { Link } from "react-router-dom"
 
 
-const Card = ({data, kind, fnc}:{data:CategorieInterface | undefined | string, kind:string, fnc?:MouseEventHandler<HTMLDivElement> | undefined}) => {
+const Card = ({data, kind, fnc, to}:{data:CategorieInterface | undefined | string, kind:string, fnc?:MouseEventHandler<HTMLDivElement> | undefined, to:string}) => {
   return (
     <>
+    <Link
+      to={to}
+    >
       <CardRoot
         minWidth={'170px'}
         colorPalette={'orange'}
@@ -17,7 +21,8 @@ const Card = ({data, kind, fnc}:{data:CategorieInterface | undefined | string, k
         position={'relative'}
         variant={'outline'}
         onClick={fnc}
-      >
+        textTransform={'uppercase'}
+        >
 
         {kind === 'product' &&
           <Image
@@ -25,7 +30,7 @@ const Card = ({data, kind, fnc}:{data:CategorieInterface | undefined | string, k
           src="#"
           alt="image"
           opacity={'45%'}
-        />
+          />
         }
 
         <CardTitle>
@@ -40,6 +45,7 @@ const Card = ({data, kind, fnc}:{data:CategorieInterface | undefined | string, k
 
 
       </CardRoot>
+          </Link>
     </>
   )
 }
