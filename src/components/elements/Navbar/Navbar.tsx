@@ -2,6 +2,7 @@ import {
   // NavigationContext, 
   ProductsContext } from "@/utils/contexts/contexts";
 import { getDataFromAt } from "@/utils/functions/api_fn/getDataFromAt";
+import { getDataOffset } from "@/utils/functions/api_fn/getDataOffset";
 // import { redirectToPage } from "@/utils/functions/navigation_fn/redirectToPage";
 import { 
   // NavigationContextInterface, 
@@ -71,6 +72,13 @@ const Navbar = () => {
             width={"50px"}
           >
             <Link
+              onClick={
+                async()=>{
+                  setProducts(
+                    await getDataFromAt(import.meta.env.VITE_PRODUCTS_TABLE)
+                  )
+                }
+              }
               to={'/dashboard'}
             >
             <Icon>
@@ -99,9 +107,14 @@ const Navbar = () => {
             width={"50px"}
             colorPalette={"orange"}
             onClick={async () => {
-              setProducts(
-                await getDataFromAt(import.meta.env.VITE_PRODUCTS_TABLE)
-              );
+              const firstCall = async ()=>{
+                const data = await getDataFromAt(import.meta.env.VITE_PRODUCTS_TABLE);
+                if(data.offset){
+                  const offset = await getDataOffset(data, import.meta.env.VITE_PRODUCTS_TABLE)
+                  setProducts(offset)
+                }
+              }
+              firstCall()
               console.log(products)
               // setFetchingData(true)
             }}

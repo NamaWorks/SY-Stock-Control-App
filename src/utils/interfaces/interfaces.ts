@@ -32,29 +32,31 @@ export interface ShoppingCartItemInterface {
 }
 
 export interface ProductFromAtInterface {
-  id:string;
-  createdTime: string;
-  fields: {
+  id?:string;
+  createdTime?: string;
+  fields?: {
     grupo?: string;
     subgrupo?: string;
-    store_id: string;
+    store_id?: string;
     nombre?: string;
     precio?: number | string;
     stock?: number | string;
     // imagen?: ImageFieldInterface;
-    imagenUrl: string;
-    row: number
+    imagenUrl?: string;
+    row?: number
   }
 }
 
 export interface RecordsInterface {
   records: ProductFromAtInterface[];
+  offset?: string;
 }
 
 export interface CategorieInterface {
   name: string | null;
   subcategories: Array<string | null>;
 }
+
 
 // export interface ImageFieldInterface {
 //   filename: string;

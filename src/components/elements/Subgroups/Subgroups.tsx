@@ -41,12 +41,12 @@ const Subgroups = () => {
     let subgroups: (string | undefined)[] | undefined = []
 
     const filteredByGroup = products?.records?.filter((item) => {
-      return item.fields.grupo === group
+      return item.fields?.grupo === group
     })
 
     filteredByGroup?.forEach((item) => {
-      if (!subgroups?.includes(item.fields.subgrupo)) {
-        subgroups?.push(item.fields.subgrupo)
+      if (!subgroups?.includes(item.fields?.subgrupo)) {
+        subgroups?.push(item.fields?.subgrupo)
       }
     })
 

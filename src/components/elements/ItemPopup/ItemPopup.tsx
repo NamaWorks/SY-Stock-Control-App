@@ -41,7 +41,7 @@ const ItemPopup = ({product, setClickedItem}:{product: ProductFromAtInterface, s
             fontWeight={'400'}
             textTransform={'uppercase'}
           >
-            {product?.fields.nombre}
+            {product?.fields?.nombre}
           </Text>
           <Text>
             {`Stock: ${product?.fields?.stock} Unidades`}
@@ -86,14 +86,14 @@ const ItemPopup = ({product, setClickedItem}:{product: ProductFromAtInterface, s
               alignItems={'center'}
               width={'40px'}
             >
-              {numberOfItemsToAdd}
+              {Number(product.fields?.stock) > 0 ? numberOfItemsToAdd : 0}
             </Text>
             <Button
               borderRadius={'full'}
               variant={'subtle'}
               fontSize={"24px"}
               width={'25px'}
-              onClick={()=>{setNumberOfItemsToAdd(numberOfItemsToAdd == product.fields.stock ? numberOfItemsToAdd : numberOfItemsToAdd + 1)}}
+              onClick={()=>{setNumberOfItemsToAdd(numberOfItemsToAdd == product.fields?.stock ? numberOfItemsToAdd : numberOfItemsToAdd + 1)}}
             >
               <Icon>
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
@@ -113,11 +113,17 @@ const ItemPopup = ({product, setClickedItem}:{product: ProductFromAtInterface, s
 
           <Button
             colorPalette={'orange'}
-            onClick={async()=>{
-              // const newArr = addNewElementToCart(productsInCart, product, numberOfItemsToAdd);
-              setProductsInCart([...productsInCart, {item:product, numberOfItems:numberOfItemsToAdd}]);
+            onClick={()=>{
+
+              if(product.fields?.stock){
+                if(Number(product.fields.stock) > 0){
+                  setProductsInCart([...productsInCart, {item:product, numberOfItems:numberOfItemsToAdd}]);
               console.log(productsInCart)
               setClickedItem(null)
+                }
+              }
+              // const newArr = addNewElementToCart(productsInCart, product, numberOfItemsToAdd);
+              
               // localStorage.setItem('currentCart', await JSON.stringify(newArr) )
             }}
           >

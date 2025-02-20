@@ -36,7 +36,7 @@ const { productsInCart, setProductsInCart } = useContext(ShoppingCartContext) as
         <Flex flexDirection={"column"} gap={'0.25rem'}>
 
           <Text fontWeight={"400"} textTransform={"uppercase"} lineHeight={'1.2'}>
-            {item?.fields.nombre}
+            {item?.fields?.nombre}
           </Text>
 
           <Text>{`Stock: ${item?.fields?.stock} Unidades`}</Text>
@@ -107,7 +107,7 @@ const { productsInCart, setProductsInCart } = useContext(ShoppingCartContext) as
               fontSize={"24px"}
               width={"25px"}
               onClick={() => {
-                setNOfItems(nOfItems == item.fields.stock ? nOfItems : nOfItems + 1);
+                setNOfItems(nOfItems == item.fields?.stock ? nOfItems : nOfItems + 1);
               }}
             >
               <Icon>

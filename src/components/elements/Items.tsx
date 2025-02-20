@@ -1,13 +1,13 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Navbar from "../Navbar/Navbar";
+import Navbar from "./Navbar/Navbar";
 import { NavigationContext, ProductsContext } from "@/utils/contexts/contexts";
 import { NavigationContextInterface, ProductFromAtInterface, ProductsContextInterface } from "@/utils/interfaces/interfaces";
 import { getDataFromAt } from "@/utils/functions/api_fn/getDataFromAt";
 import { createProductTree } from "@/utils/functions/api_fn/createProductTree";
 import { Flex } from "@chakra-ui/react";
-import ProductCard from "../ProductCard/ProductCard";
-import ItemPopup from "../ItemPopup/ItemPopup";
+import ProductCard from "./ProductCard/ProductCard";
+import ItemPopup from "./ItemPopup/ItemPopup";
 
 const Items = () => {
   const { group, subgroup } = useParams();
@@ -74,7 +74,9 @@ const Items = () => {
       >
         {
           productsToPrint?.map((prod) => {
-            return <ProductCard data={prod} fnc={()=>setClickedItem(prod)} />
+            if(prod.fields && prod.fields.stock && Number(prod.fields.stock) > 0){
+              return <ProductCard data={prod} fnc={() => setClickedItem(prod)} />
+            }
           })
         }
       </Flex>

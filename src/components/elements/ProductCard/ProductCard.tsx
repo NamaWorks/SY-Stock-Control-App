@@ -16,6 +16,7 @@ const ProductCard = ({
   data: ProductFromAtInterface;
   fnc?: MouseEventHandler<HTMLDivElement> | undefined;
 }) => {
+
   return (
     <>
       <CardRoot
@@ -42,12 +43,12 @@ const ProductCard = ({
           <Image
             // position={"absolute"}
             // src={data.fields.imagen?.thumbnails.small.url}
-            src={data.fields.imagenUrl}
+            src={data.fields?.imagenUrl || 'https://media.giphy.com/media/Zg7clvqHE3CdW/giphy.gif?cid=790b7611pqwrqvp8vyi8ah0jvhi5vhgz32hntk4hwej1n1cw&ep=v1_gifs_search&rid=giphy.gif&ct=g'}
             // height={"100%"}
             // width={"100%"}
             // alignSelf={"center"}
             // justifySelf={"center"}
-            alt={data.fields.nombre}
+            alt={data.fields?.nombre}
             objectFit={'contain'}
             objectPosition={'center'}
             borderRadius={'5px'}
@@ -63,14 +64,14 @@ const ProductCard = ({
           alignItems={'center'}
           justifyContent={'center'}
         >
-          <CardTitle textAlign={"center"} padding={'2px'} textTransform={'uppercase'} lineHeight={'0.95'}>{data.fields.nombre}</CardTitle>
+          <CardTitle textAlign={"center"} padding={'2px'} textTransform={'uppercase'} lineHeight={'0.95'} fontSize={'16px'}>{data.fields?.nombre}</CardTitle>
 
           <CardBody textAlign={"center"} padding={'2px'}>
-            {`${data.fields.stock} unidades`}
+            {`${data.fields?.stock} unidades`}
           </CardBody>
 
           <CardFooter textAlign={"center"} padding={'2px'}>
-            {`${data.fields.precio} €`}
+            {`${data.fields?.precio} €`}
           </CardFooter>
         </Flex>
       </CardRoot>

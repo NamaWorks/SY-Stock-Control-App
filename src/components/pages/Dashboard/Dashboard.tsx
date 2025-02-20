@@ -1,7 +1,9 @@
 import Navbar from "@/components/elements/Navbar/Navbar";
-import { NavigationContext, ProductsContext } from "@/utils/contexts/contexts";
+import { 
+  // NavigationContext, 
+  ProductsContext } from "@/utils/contexts/contexts";
 import {
-  NavigationContextInterface,
+  // NavigationContextInterface,
   ProductsContextInterface,
 } from "@/utils/interfaces/interfaces";
 import { memo, useContext, useEffect} from "react";
@@ -9,10 +11,11 @@ import { getDataFromAt } from "@/utils/functions/api_fn/getDataFromAt";
 import { Flex } from "@chakra-ui/react";
 import { createProductTree } from "@/utils/functions/api_fn/createProductTree";
 import Groups from "@/components/elements/Groups/Groups";
+import { getDataOffset } from "@/utils/functions/api_fn/getDataOffset";
 
 const Dashboard = memo(() => {
   // const { setCurrentPage, setFetchingData } = useContext(NavigationContext) as NavigationContextInterface;
-  const { setFetchingData } = useContext(NavigationContext) as NavigationContextInterface;
+  // const { setFetchingData } = useContext(NavigationContext) as NavigationContextInterface;
   const { products, setProducts, productsTree, setProductsTree } = useContext(ProductsContext) as ProductsContextInterface;
 
 
@@ -26,8 +29,11 @@ const Dashboard = memo(() => {
     if(!products){
       // setFetchingData(true)
       const firstCall = async ()=>{
-        setProducts(await getDataFromAt(import.meta.env.VITE_PRODUCTS_TABLE));
-        setFetchingData(false)
+        const data = await getDataFromAt(import.meta.env.VITE_PRODUCTS_TABLE);
+        if(data.offset){
+          const offset = await getDataOffset(data, import.meta.env.VITE_PRODUCTS_TABLE)
+          setProducts(offset)
+        }
       }
       firstCall()
     }
@@ -37,16 +43,6 @@ const Dashboard = memo(() => {
     //   setProducts(await getDataFromAt(import.meta.env.VITE_PRODUCTS_TABLE));
     // }, 10000);
 
-    // return () => {
-    //   clearInterval(intervalForApiCalls);
-    //   console.log("interval cleared");
-    // };
-
-    // window.addEventListener('load', ()=>{setFetchingData(false)})
-
-    return ()=>{
-      // window.removeEventListener('load', ()=>{setFetchingData(false)})
-    }
   });
 
   useEffect(() => {

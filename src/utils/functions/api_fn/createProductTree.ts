@@ -4,8 +4,8 @@ export const createProductTree = (products: RecordsInterface | undefined) => {
   const categoriesTree: CategorieInterface[] = []
 
   products?.records.forEach((item) => {
-    const categoryName = item.fields.grupo || null;
-    const subcategoryName = item.fields.subgrupo || null;
+    const categoryName = item.fields?.grupo || null;
+    const subcategoryName = item.fields?.subgrupo || null;
 
     let category = categoriesTree.find(cat => cat.name === categoryName);
     if (!category) {
