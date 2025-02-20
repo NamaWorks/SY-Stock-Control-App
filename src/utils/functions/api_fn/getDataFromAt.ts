@@ -1,8 +1,8 @@
 import { apiUrl } from "@/data/globalVariables"
-import { RecordsInterface } from "@/utils/interfaces/interfaces"
+import { RecordsInterface} from "@/utils/interfaces/interfaces"
 
-export const getDataFromAt = async (table:string):Promise<RecordsInterface> => {
-
+export const getDataFromAt = async (table:string):Promise<RecordsInterface | undefined> => {
+try {
   const res = await fetch(`${apiUrl}${import.meta.env.VITE_BASE_ID}/${table}`,{
     headers:{
       "Content-type": "application/json",
@@ -13,5 +13,8 @@ export const getDataFromAt = async (table:string):Promise<RecordsInterface> => {
 
   const data = await res.json()
 
-  return data
+  return data 
+} catch (err) {
+  console.log(err)
+}
 }

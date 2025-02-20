@@ -39,6 +39,7 @@ const ProductCard = ({
           // height={'40%'}
           overflow={'hidden'}
           display={'flex'}
+          flexDir={'row'}
         >
           <Image
             // position={"absolute"}

@@ -8,6 +8,7 @@ import { CategorieInterface, NotificationContextInterface, ProductsContextInterf
 import Subgroups from './components/elements/Subgroups/Subgroups'
 import Items from './components/elements/Items/Items'
 import Cart from './components/pages/Cart/Cart'
+import Stats from './components/pages/Stats/Stats'
 
 function App() {
 
@@ -36,6 +37,7 @@ function App() {
       <Route path='/'>
         <Route path='login' index element={<Login/>}/>
         <Route path='dashboard' element={<Dashboard/>}/>
+        <Route path='stats' element={<Stats/>}/>
         <Route path='dashboard/:group' element={<Subgroups/>}/>
         <Route path='dashboard/:group/:subgroup' element={<Items/>}/>
         <Route path='dashboard/cart' element={<Cart/>}/>

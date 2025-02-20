@@ -219,6 +219,7 @@ const Cart = () => {
                 handleStockChange()
                 setTimeout(() => {
                   setNotificationOn(false)
+                  redirectToPage('dashboard')
                 }, 2000);
               }}
             >

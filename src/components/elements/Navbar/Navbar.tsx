@@ -23,10 +23,7 @@ const Navbar = () => {
 
   return (
     <>
-
-
-
-{/* {fetchingData &&
+      {/* {fetchingData &&
       <Alert.Root
         borderStartWidth="3px"
         borderStartColor="colorPalette.600"
@@ -43,8 +40,6 @@ const Navbar = () => {
         <Alert.Title>Cargando...</Alert.Title>
       </Alert.Root>
       } */}
-
-
 
       <Flex
         flexDirection={"row"}
@@ -64,42 +59,39 @@ const Navbar = () => {
           width={"100%"}
           gap={"1rem"}
         >
-          <Button
-            colorPalette={"orange"}
-            variant={"solid"}
-            borderRadius={"full"}
-            height={"50px"}
-            width={"50px"}
-          >
-            <Link
-              onClick={
-                async()=>{
-                  setProducts(
-                    await getDataFromAt(import.meta.env.VITE_PRODUCTS_TABLE)
-                  )
-                }
-              }
-              to={'/dashboard'}
-            >
-            <Icon>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                className="lucide lucide-move-left"
+          <Link to={"/dashboard"}>
+            <Button
+              colorPalette={"orange"}
+              variant={"solid"}
+              borderRadius={"full"}
+              height={"50px"}
+              width={"50px"}
+              onClick=
+              {async () => {
+                setProducts(
+                  await getDataFromAt(import.meta.env.VITE_PRODUCTS_TABLE)
+                );
+              }}
+              >
+              <Icon>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  className="lucide lucide-move-left"
                 >
-                <path d="M6 8L2 12L6 16" />
-                <path d="M2 12H22" />
-              </svg>
-            </Icon>
-                </Link>
-          </Button>
+                  <path d="M6 8L2 12L6 16" />
+                  <path d="M2 12H22" />
+                </svg>
+              </Icon>
+            </Button>
+          </Link>
 
           <Button
             borderRadius={"full"}
@@ -107,15 +99,20 @@ const Navbar = () => {
             width={"50px"}
             colorPalette={"orange"}
             onClick={async () => {
-              const firstCall = async ()=>{
-                const data = await getDataFromAt(import.meta.env.VITE_PRODUCTS_TABLE);
-                if(data.offset){
-                  const offset = await getDataOffset(data, import.meta.env.VITE_PRODUCTS_TABLE)
-                  setProducts(offset)
+              const firstCall = async () => {
+                const data = await getDataFromAt(
+                  import.meta.env.VITE_PRODUCTS_TABLE
+                );
+                if (data.offset) {
+                  const offset = await getDataOffset(
+                    data,
+                    import.meta.env.VITE_PRODUCTS_TABLE
+                  );
+                  setProducts(offset);
                 }
-              }
-              firstCall()
-              console.log(products)
+              };
+              firstCall();
+              console.log(products);
               // setFetchingData(true)
             }}
           >
@@ -141,27 +138,27 @@ const Navbar = () => {
             </Icon>
           </Button>
 
-          <Button
-            borderRadius={"full"}
-            colorPalette={"blue"}
-            variant={"subtle"}
-          >
-            Stats
-          </Button>
+          <Link to={"/stats"}>
+            <Button
+              borderRadius={"full"}
+              colorPalette={"blue"}
+              variant={"subtle"}
+            >
+              Stats
+            </Button>
+          </Link>
         </Flex>
 
+        <Link to={"/dashboard/cart"}>
         <Button
           borderRadius={"full"}
           alignSelf={"center"}
           colorPalette={"blue"}
           variant={"subtle"}
         >
-          <Link
-            to={'/dashboard/cart'}
-          >
           Carrito
-          </Link>
         </Button>
+          </Link>
       </Flex>
     </>
   );

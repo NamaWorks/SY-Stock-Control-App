@@ -44,13 +44,12 @@ export interface ProductFromAtInterface {
     // imagen?: ImageFieldInterface;
     imagenUrl?: string;
     row?: number;
-    person?: string
+    person?: string;
+    stockOrigin?: number | string;
   }
 }
 
-export interface SaleDataInterface {
-  records:[
-    {
+export interface SaleDataInterface  {
       fields:{
         // itemsData: SaleItemsDataInterace[];
         itemsData: string;
@@ -60,11 +59,9 @@ export interface SaleDataInterface {
         pl: number;
         sy: number;
       }
-    }
-  ]
 }
 
-export interface SaleItemsDataInterace{
+export interface SaleItemsDataInterface{
   id?:string;
   nameGiven?: string;
   units?: number | string;
@@ -73,6 +70,10 @@ export interface SaleItemsDataInterace{
 
 export interface RecordsInterface {
   records: ProductFromAtInterface[];
+  offset?: string;
+}
+export interface RecordsSalesInterface {
+  records: SaleDataInterface[];
   offset?: string;
 }
 

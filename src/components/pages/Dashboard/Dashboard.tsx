@@ -35,7 +35,7 @@ const Dashboard = memo(() => {
       // setFetchingData(true)
       const firstCall = async ()=>{
         const data = await getDataFromAt(import.meta.env.VITE_PRODUCTS_TABLE);
-        if(data.offset){
+        if(data?.offset){
           const offset = await getDataOffset(data, import.meta.env.VITE_PRODUCTS_TABLE)
           setProducts(offset)
         }

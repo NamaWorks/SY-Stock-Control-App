@@ -1,10 +1,10 @@
 import { apiUrl } from "@/data/globalVariables"
-import { RecordsInterface } from "@/utils/interfaces/interfaces"
+import {  RecordsSalesInterface } from "@/utils/interfaces/interfaces"
 
-export const getDataOffset = async(data:RecordsInterface, table:string):Promise<RecordsInterface | undefined>=>{
-  if(data.offset){
+export const getDataOffsetFromSales = async(data:RecordsSalesInterface | undefined, table:string):Promise< RecordsSalesInterface | undefined>=>{
+  if(data?.offset){
 
-    // console.log(`${apiUrl}${import.meta.env.VITE_BASE_ID}/${table}/${data.offset}`)
+    console.log(`${apiUrl}${import.meta.env.VITE_BASE_ID}/${table}/${data.offset}`)
   
     const resB = await fetch(`${apiUrl}${import.meta.env.VITE_BASE_ID}/${table}?offset=${data.offset}`,{
       headers:{
