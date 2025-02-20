@@ -43,8 +43,32 @@ export interface ProductFromAtInterface {
     stock?: number | string;
     // imagen?: ImageFieldInterface;
     imagenUrl?: string;
-    row?: number
+    row?: number;
+    person?: string
   }
+}
+
+export interface SaleDataInterface {
+  records:[
+    {
+      fields:{
+        // itemsData: SaleItemsDataInterace[];
+        itemsData: string;
+        total: number;
+        metodoPago: string;
+        descuento: string | number;
+        pl: number;
+        sy: number;
+      }
+    }
+  ]
+}
+
+export interface SaleItemsDataInterace{
+  id?:string;
+  nameGiven?: string;
+  units?: number | string;
+  price?: number|string
 }
 
 export interface RecordsInterface {

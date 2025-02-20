@@ -2,6 +2,7 @@
 import { redirectToPage } from "@/utils/functions/navigation_fn/redirectToPage";
 // import { NavigationContextInterface } from "@/utils/interfaces/interfaces";
 import { Button, Flex, Image, Input } from "@chakra-ui/react";
+import { useState } from "react";
 // import { useContext, useEffect } from "react";
 
 const Login = () => {
@@ -12,6 +13,8 @@ const Login = () => {
   //   setCurrentPage('login');
   //   setPreviousPage('login')
   // })
+
+  const [ passValue, setPassValue ] = useState<number | string>()
 
   return (
     <>
@@ -24,7 +27,7 @@ const Login = () => {
         <Image
           rounded="xl"
           borderRadius={"full"}
-          src="https://bit.ly/dan-abramov"
+          src="/public/img/brand/19.jpg"
           alt="SY logo"
           height={"75px"}
           width={"75px"}
@@ -40,18 +43,22 @@ const Login = () => {
             variant={"subtle"}
             size={"sm"}
             width={"75svw"}
+            type='password'
+            onChange={(e)=>{ setPassValue(e.target.value)}}
           />
+
 
           <Button
             size={"sm"}
             variant={"subtle"}
             colorPalette={"blue"}
-            onClick={() => {
-              console.log("clicked");
-            }}
             display={"flex"}
             alignSelf={"center"}
-            onClickCapture={()=>{redirectToPage('dashboard')}}
+            onClickCapture={()=>{
+              if(passValue == '0000'){
+                redirectToPage('dashboard')
+              } else { window.alert('mala pass')}
+            }}
           >
             ACCEDER
           </Button>

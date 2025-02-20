@@ -14,6 +14,7 @@ export const patchItemById = async (table: string, recordId: string | undefined,
     });
 
     if (!res.ok) {
+      window.alert(`Error en la solicitud: ${res.status}`)
       throw new Error(`Error: ${res.status} ${res.statusText}`);
     }
 
@@ -22,6 +23,7 @@ export const patchItemById = async (table: string, recordId: string | undefined,
     return data;
   } catch (err) {
     console.error(err);
+    window.alert(`Error en la solicitud: ${err}`)
     return undefined;
   }
 };

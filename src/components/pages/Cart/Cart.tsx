@@ -1,6 +1,8 @@
 import CartItem from "@/components/elements/CartItem/CartItem";
 import Navbar from "@/components/elements/Navbar/Navbar";
+import Notification from "@/components/elements/Notification/Notification";
 import { ShoppingCartContext } from "@/utils/contexts/contexts";
+import { createNewSaleRecord, prepareSaleDataFromCart } from "@/utils/functions/api_fn/createNewSaleRecord";
 import { patchItemById } from "@/utils/functions/api_fn/patchItembyId";
 import { ShoppingCartContextInterface } from "@/utils/interfaces/interfaces";
 import { Button, Flex, Text } from "@chakra-ui/react";
@@ -12,6 +14,9 @@ const Cart = () => {
   ) as ShoppingCartContextInterface;
   const [totalPrice, setTotalPrice] = useState<number>(0);
   const [discount, setDiscount] = useState<number>(0);
+  const [ notificationOn, setNotificationOn ] = useState<boolean>(false)
+  const [ notificationText, setNotificationText ] = useState<string>('text-pending!')
+  const [ paymentMethod, setPaymentMethod ] = useState<string>('efectivo')
 
   useEffect(() => {
     console.log(productsInCart);
@@ -23,8 +28,49 @@ const Cart = () => {
     });
   }, [productsInCart]);
 
+  function handleStockChange(){
+    productsInCart.forEach((prod) => {
+      let savedId: string | undefined;
+      if (prod.item) {
+        if (prod.item.fields) {
+          if (prod.item.fields.stock) {
+            savedId = prod.item.id;
+  
+            const newStock =
+              Number(prod.item.fields.stock) - prod.numberOfItems;
+  
+            prod.item = {
+              fields: {
+                stock: `${Number(newStock)}`,
+              },
+            };
+  
+            console.log(JSON.stringify(prod.item));
+            console.log(savedId);
+            patchItemById(
+              import.meta.env.VITE_PRODUCTS_TABLE,
+              savedId,
+              prod.item
+            );
+          }
+        }
+      }
+    });
+    setProductsInCart([]);
+    setTotalPrice(0)
+  }
+
+  function handleNewSaleCreation(){
+    console.log(productsInCart)
+    console.log(prepareSaleDataFromCart(productsInCart, discount, paymentMethod, totalPrice))
+    console.log((JSON.stringify(prepareSaleDataFromCart(productsInCart, discount, paymentMethod, totalPrice))))
+    createNewSaleRecord(import.meta.env.VITE_SALES_TABLE, prepareSaleDataFromCart(productsInCart, discount, paymentMethod, totalPrice))
+
+  }
+
   return (
     <>
+    {notificationOn && <Notification text={notificationText}/>}
       <Navbar />
       <Flex
         height={"100svh"}
@@ -53,6 +99,7 @@ const Cart = () => {
             // };
             // getProductsInCart();
             setProductsInCart([]);
+            setTotalPrice(0);
           }}
         >
           LIMPIAR CARRITO
@@ -123,41 +170,49 @@ const Cart = () => {
               : totalPrice - Number(discount)
             ).toFixed(2)}€`}
           </Text>
+
+          <Flex
+            flexDirection={'row'}
+            alignItems={'center'}
+            justifyContent={'flex-start'}
+            gap={'2rem'}
+          >
+            <select 
+              name="pago" 
+              id="pago"
+              style={{
+                borderRadius: "5px",
+                height: "40px",
+                width: "65%",
+                backgroundColor: "#ea580c",
+                border: "transparent",
+                outline: "none",
+                cursor: "pointer",
+                textTransform: 'uppercase',
+                fontWeight: '400',
+                fontSize: '16px',
+                color: 'white',
+                padding: '0.5rem'
+              }}
+              onChange={(e)=>{setPaymentMethod(e.target.value)}}
+            >
+              <option value="efectivo" defaultChecked>efectivo</option>
+              <option value="bizum">bizum</option>
+            </select>
+          </Flex>
           <Flex flexDirection={"row"} justifyContent={"space-between"}>
             {/* <Button>CANCELAR</Button> */}
             <Button
               colorPalette={"orange"}
               width={'100%'}
               onClick={() => {
-                productsInCart.forEach((prod) => {
-                  let savedId: string | undefined;
-                  if (prod.item) {
-                    if (prod.item.fields) {
-                      if (prod.item.fields.stock) {
-                        savedId = prod.item.id;
-
-                        const newStock =
-                          Number(prod.item.fields.stock) - prod.numberOfItems;
-
-                        prod.item = {
-                          fields: {
-                            stock: `${Number(newStock)}`,
-                          },
-                        };
-
-                        console.log(JSON.stringify(prod.item));
-                        console.log(savedId);
-                        patchItemById(
-                          import.meta.env.VITE_PRODUCTS_TABLE,
-                          savedId,
-                          prod.item
-                        );
-                      }
-                    }
-                  }
-                });
-                setProductsInCart([]);
-                setTotalPrice(0)
+                setNotificationOn(true)
+                setNotificationText('finalizando compra')
+                handleNewSaleCreation()
+                handleStockChange()
+                setTimeout(() => {
+                  setNotificationOn(false)
+                }, 2000);
               }}
             >
               FINALIZAR
@@ -170,3 +225,5 @@ const Cart = () => {
 };
 
 export default Cart;
+
+
