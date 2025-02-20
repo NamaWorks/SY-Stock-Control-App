@@ -30,8 +30,8 @@ export const createNewSaleRecord = async(table:string, payload:SaleDataInterface
 
 export const prepareSaleDataFromCart = (cartItems:ShoppingCartItemInterface[], discount:number=0, paymentMethod:string='efectivo', totalSale:number=0):SaleDataInterface=>{
   return {
-    records:[
-      {
+    // records:[
+      // {
         fields:{
           // itemsData: cartItems.map((item)=>{return {id:item?.item?.id, nameGiven:item?.item?.fields?.nombre, units:item?.numberOfItems, price:item?.item?.fields?.precio}}),
           itemsData: ` ${cartItems.filter((item)=>item.numberOfItems>0).map((item)=>{return `name:${item.item.fields?.nombre}; numberOfItems:${item.numberOfItems}; id:${item.item.id}; price:${item.item.fields?.precio} |`})}`,
@@ -41,8 +41,8 @@ export const prepareSaleDataFromCart = (cartItems:ShoppingCartItemInterface[], d
           pl: checkSalesUser(cartItems).plSales,
           sy: checkSalesUser(cartItems).sySales
         }
-      }
-    ]
+      // }
+    // ]
   }
 }
 
