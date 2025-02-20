@@ -49,13 +49,16 @@ const Stats = () => {
       }
     }
     getSalesData()
+
+    setSoldArticles(products?.records.map((record)=>Number(record.fields?.stockOrigin)-Number(record.fields?.stock)).reduce((a,b)=>a+b))
+    setTotalItemsToSell(products?.records.map((record)=>Number(record.fields?.stockOrigin)).reduce((a,b)=>a+b))
+    
     if(salesRecords?.records){
       if(salesRecords?.records.length > 0){
           setPlSales(salesRecords.records.map((record)=>record.fields.pl).reduce((a,b)=>a+b))
           setSySales(salesRecords?.records.map((record)=>record.fields.sy).reduce((a,b)=>a+b))
-          setSoldArticles(products?.records.map((record)=>Number(record.fields?.stockOrigin)-Number(record.fields?.stock)).reduce((a,b)=>a+b))
-          setTotalItemsToSell(products?.records.map((record)=>Number(record.fields?.stockOrigin)).reduce((a,b)=>a+b))
           setTotalIncome(salesRecords?.records.map((record)=>record.fields.total).reduce((a,b)=>a+b))
+          console.log(totalItemsToSell)
       }
     }
 
