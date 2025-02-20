@@ -103,7 +103,7 @@ const Navbar = () => {
                 const data = await getDataFromAt(
                   import.meta.env.VITE_PRODUCTS_TABLE
                 );
-                if (data.offset) {
+                if (data?.offset) {
                   const offset = await getDataOffset(
                     data,
                     import.meta.env.VITE_PRODUCTS_TABLE
