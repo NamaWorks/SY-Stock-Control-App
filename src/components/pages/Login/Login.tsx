@@ -57,6 +57,7 @@ const Login = () => {
             onClickCapture={()=>{
               if(passValue == '0000'){
                 redirectToPage('dashboard')
+                localStorage.setItem('login', 'true')
               } else { window.alert('mala pass')}
             }}
           >

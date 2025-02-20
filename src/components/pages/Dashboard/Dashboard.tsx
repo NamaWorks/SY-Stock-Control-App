@@ -12,6 +12,7 @@ import { Flex } from "@chakra-ui/react";
 import { createProductTree } from "@/utils/functions/api_fn/createProductTree";
 import Groups from "@/components/elements/Groups/Groups";
 import { getDataOffset } from "@/utils/functions/api_fn/getDataOffset";
+import { redirectToPage } from "@/utils/functions/navigation_fn/redirectToPage";
 
 const Dashboard = memo(() => {
   // const { setCurrentPage, setFetchingData } = useContext(NavigationContext) as NavigationContextInterface;
@@ -25,6 +26,10 @@ const Dashboard = memo(() => {
   // });
 
   useEffect(() => {
+
+    if(sessionStorage.getItem('login') !== 'true'){
+      redirectToPage('login')
+    }
 
     if(!products){
       // setFetchingData(true)

@@ -5,6 +5,7 @@ import { Flex } from "@chakra-ui/react"
 import { useContext, useEffect } from "react"
 import { NavigationContext } from "@/utils/contexts/contexts.tsx"
 import { NavigationContextInterface } from "@/utils/interfaces/interfaces"
+import { redirectToPage } from "@/utils/functions/navigation_fn/redirectToPage.ts"
 
 const Groups = ( {productsTree} : {productsTree: CategorieInterface[] | undefined}) => {
 
@@ -13,6 +14,9 @@ const Groups = ( {productsTree} : {productsTree: CategorieInterface[] | undefine
 
   useEffect(()=>{
     setFetchingData(true)
+    if(sessionStorage.getItem('login') !== 'true'){
+          redirectToPage('login')
+        }
   },[setFetchingData])
 
   return (

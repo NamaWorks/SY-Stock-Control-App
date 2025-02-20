@@ -4,6 +4,7 @@ import Notification from "@/components/elements/Notification/Notification";
 import { ShoppingCartContext } from "@/utils/contexts/contexts";
 import { createNewSaleRecord, prepareSaleDataFromCart } from "@/utils/functions/api_fn/createNewSaleRecord";
 import { patchItemById } from "@/utils/functions/api_fn/patchItembyId";
+import { redirectToPage } from "@/utils/functions/navigation_fn/redirectToPage";
 import { ShoppingCartContextInterface } from "@/utils/interfaces/interfaces";
 import { Button, Flex, Text } from "@chakra-ui/react";
 import { useContext, useEffect, useState } from "react";
@@ -27,6 +28,14 @@ const Cart = () => {
       setTotalPrice(acc);
     });
   }, [productsInCart]);
+
+  useEffect(()=>{
+
+    if(sessionStorage.getItem('login') !== 'true'){
+          redirectToPage('login')
+        }
+
+  })
 
   function handleStockChange(){
     productsInCart.forEach((prod) => {
@@ -107,7 +116,7 @@ const Cart = () => {
 
         <Flex flexDirection={"column"} gap={"0.5rem"} width={"100%"}>
           {productsInCart.map((product, i) => {
-            if (product.numberOfItems > 0) {
+            // if (product.numberOfItems > 0) {
               return (
                 <CartItem
                   item={product.item}
@@ -115,7 +124,7 @@ const Cart = () => {
                   index={i}
                 />
               );
-            }
+            // }
           })}
         </Flex>
 
@@ -165,10 +174,8 @@ const Cart = () => {
             width={"100%"}
             textAlign={"end"}
           >
-            {`TOTAL: ${(discount > totalPrice
-              ? 0
-              : totalPrice - Number(discount)
-            ).toFixed(2)}€`}
+            {/* {`TOTAL: ${(discount > totalPrice? 0: totalPrice - Number(discount)).toFixed(2)}€`} */}
+            {`TOTAL: ${(totalPrice - Number(discount)).toFixed(2)}€`}
           </Text>
 
           <Flex

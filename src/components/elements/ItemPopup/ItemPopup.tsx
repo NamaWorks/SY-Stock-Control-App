@@ -72,8 +72,8 @@ const ItemPopup = ({product, setClickedItem}:{product: ProductFromAtInterface, s
               variant={'subtle'}
               fontSize={"24px"}
               width={'25px'}
-              onClick={()=>{setNumberOfItemsToAdd(numberOfItemsToAdd <= 1 ? numberOfItemsToAdd : numberOfItemsToAdd-1)}}
-              // onClick={()=>{setNumberOfItemsToAdd(numberOfItemsToAdd-1)}}
+              // onClick={()=>{setNumberOfItemsToAdd(numberOfItemsToAdd <= 1 ? numberOfItemsToAdd : numberOfItemsToAdd-1)}}
+              onClick={()=>{setNumberOfItemsToAdd(numberOfItemsToAdd-1)}}
               >
               <Icon>
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-minus"><path d="M5 12h14"/></svg>
@@ -87,16 +87,16 @@ const ItemPopup = ({product, setClickedItem}:{product: ProductFromAtInterface, s
               alignItems={'center'}
               width={'40px'}
             >
-              {Number(product.fields?.stock) > 0 ? numberOfItemsToAdd : 0}
-              {/* {Number(numberOfItemsToAdd)} */}
+              {/* {Number(product.fields?.stock) > 0 ? numberOfItemsToAdd : 0} */}
+              {Number(numberOfItemsToAdd)}
             </Text>
             <Button
               borderRadius={'full'}
               variant={'subtle'}
               fontSize={"24px"}
               width={'25px'}
-              onClick={()=>{setNumberOfItemsToAdd(numberOfItemsToAdd == product.fields?.stock ? numberOfItemsToAdd : numberOfItemsToAdd + 1)}}
-              // onClick={()=>{setNumberOfItemsToAdd(numberOfItemsToAdd + 1)}}
+              // onClick={()=>{setNumberOfItemsToAdd(numberOfItemsToAdd == product.fields?.stock ? numberOfItemsToAdd : numberOfItemsToAdd + 1)}}
+              onClick={()=>{setNumberOfItemsToAdd(numberOfItemsToAdd + 1)}}
             >
               <Icon>
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg>

@@ -18,9 +18,9 @@ const { productsInCart, setProductsInCart } = useContext(ShoppingCartContext) as
 
   return (
     <>
-    {
-      nOfItems> 0 &&
-      (
+    {/* { */}
+      {/* // nOfItems */}
+      {/* ( */}
         <>
       <Flex
         position={"relative"}
@@ -71,7 +71,8 @@ const { productsInCart, setProductsInCart } = useContext(ShoppingCartContext) as
               fontSize={"24px"}
               width={"25px"}
               onClick={() => {
-                setNOfItems(nOfItems <= 1 ? 0 : nOfItems - 1);                
+                // setNOfItems(nOfItems <= 1 ? 0 : nOfItems - 1);                
+                setNOfItems(nOfItems - 1);                
               }}
             >
               <Icon>
@@ -107,7 +108,8 @@ const { productsInCart, setProductsInCart } = useContext(ShoppingCartContext) as
               fontSize={"24px"}
               width={"25px"}
               onClick={() => {
-                setNOfItems(nOfItems == item.fields?.stock ? nOfItems : nOfItems + 1);
+                // setNOfItems(nOfItems == item.fields?.stock ? nOfItems : nOfItems + 1);
+                setNOfItems(nOfItems + 1);
               }}
             >
               <Icon>
@@ -132,9 +134,9 @@ const { productsInCart, setProductsInCart } = useContext(ShoppingCartContext) as
         </Flex>
       </Flex>
     </>
-      )
+      {/* ) */}
 
-    }
+    {/* } */}
     </>
   );
 }

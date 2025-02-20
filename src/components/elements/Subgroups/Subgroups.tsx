@@ -7,6 +7,7 @@ import { getDataFromAt } from "@/utils/functions/api_fn/getDataFromAt"
 import Card from "../Card/Card"
 import { createProductTree } from "@/utils/functions/api_fn/createProductTree"
 import { Flex } from "@chakra-ui/react"
+import { redirectToPage } from "@/utils/functions/navigation_fn/redirectToPage"
 // import { redirectToPage } from "@/utils/functions/navigation_fn/redirectToPage"
 
 const Subgroups = () => {
@@ -15,6 +16,12 @@ const Subgroups = () => {
   const { setFetchingData } = useContext(NavigationContext) as NavigationContextInterface;
 
   const [subgroupsToPrint, setSubgroupsToPrint] = useState<(string | undefined)[] | undefined>(undefined)
+
+  useEffect(()=>{
+    if(sessionStorage.getItem('login') !== 'true'){
+          redirectToPage('login')
+        }
+  })
 
   useEffect(() => {
     const start = async () => {
