@@ -27,7 +27,7 @@ const Login = () => {
         <Image
           rounded="xl"
           borderRadius={"full"}
-          src="/public/img/brand/19.jpg"
+          src="./public/img/brand/19.jpg"
           alt="SY logo"
           height={"75px"}
           width={"75px"}
@@ -57,7 +57,7 @@ const Login = () => {
             onClickCapture={()=>{
               if(passValue == '0000'){
                 redirectToPage('dashboard')
-                localStorage.setItem('login', 'true')
+                sessionStorage.setItem('login', 'true')
               } else { window.alert('mala pass')}
             }}
           >

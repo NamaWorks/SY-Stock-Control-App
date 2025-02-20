@@ -27,7 +27,7 @@ const Dashboard = memo(() => {
 
   useEffect(() => {
 
-    if(sessionStorage.getItem('login') !== 'true'){
+    if(!(sessionStorage.getItem('login') === 'true')){
       redirectToPage('login')
     }
 
